@@ -1,20 +1,26 @@
-import { useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
-import styles from '../styles/components/Profile.module.css';
+import { ChallengesContext } from '../contexts/ChallengesContext'
+import { useContext } from 'react'
+import { User } from '../pages/dashboard'
 
-export function Profile() {
-    const { level } = useContext(ChallengesContext);
+import styles from '../styles/components/Profile.module.css'
 
-    return (
-        <div className={styles.profileContainer}>
-            <img src="https://github.com/scarvalhos.png" alt="Samara Carvalho"/>
-            <div>
-                <strong>Samara Carvalho</strong>
-                <p>
-                    <img src="icons/level.svg" alt="Level" />
-                    Level {level}
-                </p>
-            </div>
-        </div>
-    );
+interface ProfileProps {
+  user: User
+}
+
+export const Profile: React.FC<ProfileProps> = ({ user }) => {
+  const { level } = useContext(ChallengesContext)
+
+  return (
+    <div className={styles.profileContainer}>
+      <img src={user?.avatar_url} alt={user?.name} />
+      <div>
+        <strong>{user?.name}</strong>
+        <p>
+          <img src="icons/level.svg" alt="Level" />
+          Level {level}
+        </p>
+      </div>
+    </div>
+  )
 }
